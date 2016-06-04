@@ -29,18 +29,18 @@ QPushButton * Calculator::createButton(QString const & str) {
 
 void Calculator::calculate() {
     double dOperand2 = m_stk.pop().toDouble();
-    QString strOperation = m_stk.pop();
+    char strOperation = m_stk.pop().at(0).toLatin1();
     double dOperand1 = m_stk.pop().toDouble();
     double dResult = 0.;
 
-    if (strOperation == "/") {
-        dResult = dOperand1 / dOperand2;
-    } else if (strOperation == "*") {
-        dResult = dOperand1 * dOperand2;
-    } else if (strOperation == "-") {
-        dResult = dOperand1 - dOperand2;
-    } else if (strOperation == "+") {
-        dResult = dOperand1 + dOperand2;
+    switch (strOperation) {
+    case '/' : dResult = dOperand1 / dOperand2;
+        break;
+    case '*' : dResult = dOperand1 * dOperand2;
+        break;
+    case '-': dResult = dOperand1 - dOperand2;
+        break;
+    case '+' : dResult = dOperand1 + dOperand2;
     }
 
     m_plcd->display(dResult);
